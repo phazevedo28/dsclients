@@ -22,7 +22,7 @@ public class ClientDTO {
 		this.id = entity.getId();
 	}
 
-	public ClientDTO(Long id, String name, String cpf, Double income, Integer children, Instant birthDate) {
+	public ClientDTO(Long id, String name, String cpf, Double income, Instant birthDate, Integer children) {
 		this.name = name;
 		this.cpf = cpf;
 		this.income = income;
