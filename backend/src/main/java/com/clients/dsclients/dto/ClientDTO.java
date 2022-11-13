@@ -1,21 +1,11 @@
-package com.clients.dsclients.entities;
+package com.clients.dsclients.dto;
 
-import java.io.Serializable;
 import java.time.Instant;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.clients.dsclients.entities.Client;
 
-@Entity
-@Table(name = "tb_client")
-public class Client implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class ClientDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String cpf;
@@ -23,11 +13,16 @@ public class Client implements Serializable {
 	private Integer children;
 	private Instant birthDate;
 
-	public Client() {
-
+	public ClientDTO(Client entity) {
+		this.name = entity.getName();
+		this.cpf = entity.getCpf();
+		this.income = entity.getIncome();
+		this.children = entity.getChildren();
+		this.birthDate = entity.getBirthDate();
+		this.id = entity.getId();
 	}
 
-	public Client(Long id, String name, String cpf, Double income, Integer children, Instant birthDate) {
+	public ClientDTO(Long id, String name, String cpf, Double income, Integer children, Instant birthDate) {
 		this.name = name;
 		this.cpf = cpf;
 		this.income = income;
