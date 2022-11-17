@@ -35,7 +35,6 @@ public class ClientService {
 		Optional<Client> clients = repository.findById(id);
 		Client entity = clients.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new ClientDTO(entity);
-
 	}
 
 	@Transactional
@@ -43,7 +42,6 @@ public class ClientService {
 		Client entity = new Client();
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
-
 		return new ClientDTO(entity);
 	}
 

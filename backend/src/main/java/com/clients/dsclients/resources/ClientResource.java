@@ -31,8 +31,7 @@ public class ClientResource {
 	@GetMapping
 	public ResponseEntity<Page<ClientDTO>> findAll(@RequestParam(value = "page") Integer page,
 			@RequestParam(value = "linesPerPage") Integer linesPerPage,
-			@RequestParam(value = "direction") String direction,
-			@RequestParam(value = "orderBy" ) String orderBy) {
+			@RequestParam(value = "direction") String direction, @RequestParam(value = "orderBy") String orderBy) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Page<ClientDTO> dto = service.findAll(pageRequest);
 		return ResponseEntity.ok(dto);
@@ -43,22 +42,23 @@ public class ClientResource {
 		ClientDTO dto = service.findById(id);
 		return ResponseEntity.ok(dto);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<ClientDTO> insert (@RequestBody ClientDTO dto){
+	public ResponseEntity<ClientDTO> insert(@RequestBody ClientDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
-	
+
 	@PutMapping(value = "{id}")
-	public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO dto){
+	public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO dto) {
 		dto = service.update(id, dto);
 		return ResponseEntity.ok(dto);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
-		return ResponseEntity.noContent().build();	}
+		return ResponseEntity.noContent().build();
+	}
 }
